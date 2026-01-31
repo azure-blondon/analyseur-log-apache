@@ -1,0 +1,4 @@
+fichier_source: ../test.log
+#fichier_graphe: test2.dot
+#exclure_extensions: true
+creneau_horaire: 15

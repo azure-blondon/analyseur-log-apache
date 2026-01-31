@@ -1,0 +1,68 @@
+# Manuel d'utilisation
+
+## Nom des membres du groupe (et numéros de binôme)
+
+- BLONDON Azure
+- CABIAS Simon
+- DEBUREAUX Mégane (B3409)
+- DUPREZ Juliette
+
+## Présentation
+
+Nous avons réalisé un outil en ligne de commande permettant d’analyser un fichier de log Apache. Cet outil peut générer des documents synthétiques au format GraphViz, mais aussi des statistiques.
+
+Lors de notre analyse, nous ne considérons que les requêtes ayant effectivement abouti et les redirections, excluant donc les erreurs.
+
+## Mode d'emploi
+
+### Commande :
+
+```$./analog [cheminFichier] [options]```
+
+Par défaut, c’est-à-dire quand il n’y a aucune option, il affichera sur la console sous forme textuelle la liste des 10 documents les plus consultés par ordre décroissant de popularité. Aucun fichier “.dot” n’est généré dans ce cas. Les options en ligne de commande sont détaillées ci-après.
+
+Si une option n'est pas présente dans la ligne de commande, le programme se réfèrera à la configuration par défaut (fichier config). Si toutefois vous ne voulez pas qu'une option soit considérée, il suffit d'ajouter un # devant la ligne de configuration pour la commenter.
+
+### Options :
+
+- ```[-g cheminFichier]```
+
+Cette option permet de produire un fichier au format GraphViz du graphe analysé. Chaque document apparaîtra sous la forme d’un nœud et chaque arc indiquera le nombre de parcours associés.
+
+Le nom du fichier .dot généré peut être configuré soit directement après l'option, soit, par défaut, dans le fichier ```config```
+
+- ```[-e]```
+
+Cette option permet d’exclure tous les documents qui ont une extension de type image, css ou javascript. Par défaut, cette option est désactivée.
+
+- ```[-t heure]```
+
+Cette option permet de ne prendre en compte que les hits qui sont dans le créneau horaire correspondant à l’intervalle ```[heure, heure+1[```.
+
+Le créneau horaire à prendre en compte peut être configuré soit directement après l'option, soit, par défaut, dans le fichier ```config```.
+
+- ```[-c cheminConfig]```
+
+Cette option permet de spécifier le fichier de configuration à utiliser. Par défaut, ce sera le fichier config.
+
+### Fichier config :
+
+Ce fichier permet de configurer rapidement les options de l'outil.
+
+Quatre champs sont disponibles :
+
+- fichier_source : ```[cheminFichier.log]```
+
+Ce champ permet de spécifier le fichier d'entrée, qui contient les logs à analyser.
+
+- fichier_graphe : ```[cheminFichier.dot]```
+
+Ce champ permet de spécifier le fichier de sortie, qui permettra de générer le graphe.
+
+- exclure_extensions : ```[true|false]```
+
+Ce champ permet de spécifier si l'on veut ou non exclure les fichier avec des extensions de type image, css ou javascript.
+
+- creneau_horaire : ```[heure]```
+
+Ce champ permet de spécifier le créneau horaires des requêtes que l'on veut traiter. On traitera les requêtes comprises dans l'intervalle ```[heure, heure+1[```.
