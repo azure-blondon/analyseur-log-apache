@@ -30,7 +30,8 @@ using namespace std;
 //------------------------------------------------------------------ Types
 
 //---------------------------------------------------- Variables statiques
-static vector<string> extensions_image = vector<string>(["gif", "png", "jpg", "jpeg"]);
+static const string extensions_image_array[] = {"gif", "png", "jpg", "jpeg"};
+static const vector<string> extensions_image_vector = vector<string>(extensions_image_array, extensions_image_array + 4);
 //------------------------------------------------------ Fonctions privées
 
 //////////////////////////////////////////////////////////////////  PUBLIC
@@ -62,8 +63,8 @@ int main(int argc, const char *argv[])
     AssociationURLHits top10;
 
     while (fichier >> requeteCourante) {
-        if (config.exclureExtensions && !requeteCourante.ExtensionDifferenteDe(extensions_image)) continue;
-        if (config.creneauHoraire && !requeteCourante.EstDansLeCreneauHoraire(config.creneauHoraire)) continue;
+        if (config.exclureExtensions && !requeteCourante.ExtensionDifferenteDe(extensions_image_vector)) continue;
+        if (config.creneauHoraire && !requeteCourante.EstDansLeCreneauHoraire(config.creneauHoraire.value_or(0))) continue;
 
         AjouterDansAssociation(requeteCourante, top10);
     }
