@@ -118,7 +118,7 @@ void AjouterDansAssociation(const Requete & uneRequete, AssociationURLHits & une
 //             si il y a une correspondance, on incrémente le hit (le fait d'avoir deux fois le même site  
 //
 {
-  URL URLGet(uneRequete.URLCible);
+  URL URLGet(uneRequete.SupprimerNomDeDomaine(uneRequete.URLCible));
   AssociationURLHits::iterator pAsso;
   
   if(!URLGet.empty())
@@ -149,7 +149,7 @@ void AjouterDansDicoGraphe(const Requete & uneRequete, DicoGraphe &unDicoGraphe)
 //               si il y a une entrée, on met a jour ses association (qui vont correspondre aux requete qui partent de la source) 
 //
 {
-  URL URLSrc(uneRequete.URLReferenceur);
+  URL URLSrc(uneRequete.SupprimerNomDeDomaine(uneRequete.URLReferenceur));
   
   AssociationURLHits* DicoURLHits;
   DicoGraphe::iterator pAsso;
