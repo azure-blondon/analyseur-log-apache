@@ -112,13 +112,14 @@ ostream& operator<<(ostream& os, const AssociationURLHits& uneAsso)
 
   
 
-void AjouterDansAssociation(const Requete & uneRequete, AssociationURLHits & uneAssociation)
+void AjouterDansAssociation(Requete & uneRequete, AssociationURLHits & uneAssociation)
 // Algorithme : Recherche l'URL geté de la requête dans le dictionnaire
 //             si il n'y a pas de correspondance, l'URL est ajouté au dictionnaire et le hit qu'elle identifie est initialisé a 1
 //             si il y a une correspondance, on incrémente le hit (le fait d'avoir deux fois le même site  
 //
 {
-  URL URLGet(uneRequete.SupprimerNomDeDomaine(uneRequete.URLCible));
+  uneRequete.SupprimerNomDeDomaine(uneRequete.URLCible);
+  URL URLGet(uneRequete.URLCible);
   AssociationURLHits::iterator pAsso;
   
   if(!URLGet.empty())
@@ -143,13 +144,14 @@ void AjouterDansAssociation(const Requete & uneRequete, AssociationURLHits & une
 
 //typedef AssociationURLHits = unordered_map<URL, int>;
 ///typedef DicoGraphe = unordered_map<URL, AssociationURLHits>;
-void AjouterDansDicoGraphe(const Requete & uneRequete, DicoGraphe &unDicoGraphe)
+void AjouterDansDicoGraphe(Requete & uneRequete, DicoGraphe &unDicoGraphe)
 // Algorithme : recherche dans le graphe l'entrée correspondant à l'url qui fait la  requête
 //               si il n'y a pas d'entrée correspondante, on en crée une en initialisant une AssociationURLHits
 //               si il y a une entrée, on met a jour ses association (qui vont correspondre aux requete qui partent de la source) 
 //
 {
-  URL URLSrc(uneRequete.SupprimerNomDeDomaine(uneRequete.URLReferenceur));
+  uneRequete.SupprimerNomDeDomaine(uneRequete.URLReferenceur);
+  URL URLSrc(uneRequete.URLReferenceur);
   
   AssociationURLHits* DicoURLHits;
   DicoGraphe::iterator pAsso;
