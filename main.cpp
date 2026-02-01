@@ -29,7 +29,7 @@ using namespace std;
 //------------------------------------------------------------------ Types
 
 //---------------------------------------------------- Variables statiques
-
+static vector<string> extensions_image = vector<string>(["gif", "png", "jpg", "jpeg"]);
 //------------------------------------------------------ Fonctions privées
 
 //////////////////////////////////////////////////////////////////  PUBLIC
@@ -61,6 +61,9 @@ int main(int argc, const char *argv[])
     AssociationURLHits top10;
 
     while (fichier >> requeteCourante) {
+        if (config.exclureExtensions && requeteCourante.ExtensionDifferenteDe(extensions_image)) {
+            continue;
+        }
         AjouterDansAssociation(requeteCourante, top10);
     }
 
