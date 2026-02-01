@@ -45,10 +45,9 @@ struct Requete
 
 
 //----------------------------------------------------- Méthodes
-    void SupprimerNomDeDomaine(const URL & NomDeDomaine);
+    string SupprimerNomDeDomaine(const URL & uneURL) const;
     // Mode d'emploi :
-    // Permet d'enlever le nom de domaine de l'URL référenceur
-
+    // Renvoie l'URL placée en paramètre sans le nom de domaine
 
 
     bool EstOK() const;

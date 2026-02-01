@@ -26,11 +26,40 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 
-void Requete::SupprimerNomDeDomaine(const URL & NomDeDomaine){
-    if (URLReferenceur.find(NomDeDomaine)==0){ //à vérifier dans le fichier pour voir si ça commence toujorus par le nom de domaine
-        URLReferenceur.erase(0,NomDeDomaine.length());
+// In Requete.cpp (or a private static helper)
+string Requete::SupprimerNomDeDomaine(const URL & uneURL) const
+{
+    if (uneURL.empty() || uneURL == "-")
+    {
+        return "";
     }
-} //----- Fin de SupprimerNomDeDomaine
+    size_t posSchema = uneURL.find("://");
+    if (posSchema == string::npos)
+    {
+        if (!uneURL.empty() && uneURL[0] == '/')
+        {
+            return uneURL;
+        }
+        size_t premierSlash = uneURL.find('/');
+        if (premierSlash == string::npos)
+        {
+            return "";
+        }
+        else 
+        {
+            return uneURL.substr(premierSlash);
+        }
+    }
+
+    size_t apresSchema = posSchema + 3;
+    size_t premierSlash = uneURL.find('/', apresSchema);
+    if (premierSlash == string::npos)
+    {
+        return "/";
+    }
+    return uneURL.substr(premierSlash);
+}
+ //----- Fin de SupprimerNomDeDomaine
 
 
 bool Requete::EstOK() const{
