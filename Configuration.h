@@ -32,6 +32,7 @@ struct Configuration
     std::optional<int> creneauHoraire;
     std::optional<bool> exclureExtensions;
 //----------------------------------------------------- Méthodes publiques
+    static Configuration TrouverConfig(int argc, const char *argv[]);
     void MettreAJour(const std::string & clef, const std::string & valeur);
     void Charger(const Configuration &uneConfiguration, bool remplacer=true);
 

@@ -147,6 +147,51 @@ Configuration::~Configuration()
 } //----- Fin de ~Configuration
 
 
+Configuration Configuration::TrouverConfig(int argc, const char *argv[])
+{
+
+    Configuration config;
+
+
+    for (int i = 1; i < argc; i++) {
+        const char *arg = argv[i];
+        if (strcmp(arg, "-e") == 0) {
+            config.exclureExtensions = true;
+            continue;
+        }
+        if (strcmp(arg, "-t") == 0) {
+            i++;
+            istringstream tmp(argv[i]);
+            config.creneauHoraire = Configuration::lire<int>(tmp);
+            continue;
+        }
+        if (strcmp(arg, "-g") == 0) {
+            i++;
+            istringstream tmp(argv[i]);
+            config.fichierGraphe = Configuration::lire<string>(tmp);
+            continue;
+        }
+        if (strcmp(arg, "-c") == 0) {
+            i++;
+            istringstream tmp(argv[i]);
+            config.fichierConfig = Configuration::lire<string>(tmp);
+            continue;
+        }
+        config.fichierSource = argv[i];
+    }
+
+    Configuration configFichier(config.fichierConfig.value_or("config"));
+    config.Charger(configFichier, false);
+
+    // cout << "config fichier :" << endl;
+    // cout << configFichier << endl << endl;
+
+    // cout << "config finale :" << endl;
+    // cout << config << endl;
+
+    return config;
+}
+
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées

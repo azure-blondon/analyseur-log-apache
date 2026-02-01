@@ -1,5 +1,5 @@
-main: main.o Configuration.o Requete.o
-	g++ -o main main.o Configuration.o Requete.o
+main: main.o Configuration.o Requete.o Structures.o
+	g++ -o main main.o Configuration.o Requete.o Structures.o
 
 main.o: main.cpp
 	g++ -c main.cpp
