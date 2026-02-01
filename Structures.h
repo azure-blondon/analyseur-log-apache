@@ -48,12 +48,12 @@ void createTop10(const AssociationURLHits& uneAsso,std::array<std::pair<int,URL>
 void AfficherTop10(const AssociationURLHits& uneAsso);
 //affiche de manière trié (plus haut en haut) les 10 élément avec le plus de hits de l'association sous la forme "URL  (nhits hits)
   
-void AjouterDansAssociation(Requete & uneRequete, AssociationURLHits & uneAssociation);
+void AjouterDansAssociation(const Requete & uneRequete, AssociationURLHits & uneAssociation);
 //ajoute la cible de la requete dans l'association avec un hit de 1.
 //le deuxième élément correspond à l'hit de l'url, le nombre de fois où l'url est ajouté dans l'association
 
 
-void AjouterDansDicoGraphe(Requete & uneRequete, DicoGraphe &unDicoGraphe);
+void AjouterDansDicoGraphe(const Requete & uneRequete, DicoGraphe &unDicoGraphe);
 //ajoute une requete dans un graphe.
 
 std::ostream& operator<<(std::ostream& os,const AssociationURLHits& uneAsso);
