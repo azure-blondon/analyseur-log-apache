@@ -53,23 +53,34 @@ int main(int argc, const char *argv[])
 
     ifstream fichier(config.fichierSource.value_or(""));
 
-    if (!fichier) {
-        return 1;
-    }
+    if (!fichier) return 1;
+    
 
     Requete requeteCourante;
     
     
     AssociationURLHits top10;
+    DicoGraphe graphe;
 
     while (fichier >> requeteCourante) {
         if (config.exclureExtensions && !requeteCourante.ExtensionDifferenteDe(extensions_image_vector)) continue;
         if (config.creneauHoraire && !requeteCourante.EstDansLeCreneauHoraire(config.creneauHoraire.value_or(0))) continue;
 
         AjouterDansAssociation(requeteCourante, top10);
+        if (config.fichierGraphe) {
+            AjouterDansDicoGraphe(requeteCourante, graphe);
+        }
     }
 
     AfficherTop10(top10);
+    
+    if (config.fichierGraphe) {
+
+        ofstream fichier_graphe(config.fichierGraphe.value_or(""));
+        if (!fichier_graphe) return 1;
+        GenererGraphe(fichier_graphe, graphe);
+        cout << "fichier.dot généré !" << endl;
+    }
     
     return 0;
 } //----- fin de Nom
