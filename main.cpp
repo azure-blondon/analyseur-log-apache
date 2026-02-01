@@ -22,6 +22,7 @@ using namespace std;
 #include "Configuration.h"
 #include "Requete.h"
 #include "Structures.h"
+#include "Graphe.h"
 
 ///////////////////////////////////////////////////////////////////  PRIVE
 //------------------------------------------------------------- Constantes
@@ -56,19 +57,19 @@ int main(int argc, const char *argv[])
     }
 
     Requete requeteCourante;
-
-
+    
+    
     AssociationURLHits top10;
 
     while (fichier >> requeteCourante) {
-        if (config.exclureExtensions && requeteCourante.ExtensionDifferenteDe(extensions_image)) {
-            continue;
-        }
+        if (config.exclureExtensions && !requeteCourante.ExtensionDifferenteDe(extensions_image)) continue;
+        if (config.creneauHoraire && !requeteCourante.EstDansLeCreneauHoraire(config.creneauHoraire)) continue;
+
         AjouterDansAssociation(requeteCourante, top10);
     }
 
     AfficherTop10(top10);
-
+    
     return 0;
 } //----- fin de Nom
 
