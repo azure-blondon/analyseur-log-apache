@@ -1,20 +1,20 @@
-analog: main.o Configuration.o Requete.o Structures.o Graphe.o
-	g++ -o analog main.o Configuration.o Requete.o Structures.o Graphe.o
+analog: bin/main.o bin/Configuration.o bin/Requete.o bin/Structures.o bin/Graphe.o
+	g++ -o bin/analog bin/main.o bin/Configuration.o bin/Requete.o bin/Structures.o bin/Graphe.o
 
-main.o: main.cpp
-	g++ -c main.cpp
+bin/main.o: src/main.cpp
+	g++ -o bin/main.o -c src/main.cpp
 
-Requete.o: Requete.cpp Requete.h
-	g++ -c Requete.cpp
+bin/Requete.o: src/Requete.cpp src/Requete.h
+	g++ -o bin/Requete.o -c src/Requete.cpp
 
-Configuration.o: Configuration.cpp Configuration.h
-	g++ -c Configuration.cpp
+bin/Configuration.o: src/Configuration.cpp src/Configuration.h
+	g++ -o bin/Configuration.o -c src/Configuration.cpp
 
-Structures.o: Structures.cpp Structures.h
-	g++ -c Structures.cpp
+bin/Structures.o: src/Structures.cpp src/Structures.h
+	g++ -o bin/Structures.o -c src/Structures.cpp
 
-Graphe.o: Graphe.cpp Graphe.h
-	g++ -c Graphe.cpp
+bin/Graphe.o: src/Graphe.cpp src/Graphe.h
+	g++ -o bin/Graphe.o -c src/Graphe.cpp
 
 clean:
-	rm -f *.dot *.o *.ou
+	rm -f bin/*.dot bin/*.o bin/*.ou

@@ -1,4 +1,4 @@
-fichier_source: test.log
+fichier_source: logs/test.log
 #fichier_graphe: hello.dot
-creneau_horaire: 15
+#creneau_horaire: 15
 #exclure_extensions: true
