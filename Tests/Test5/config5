@@ -1,4 +1,3 @@
 fichier_source: ../test.log
-#fichier_graphe: test2.dot
 exclure_extensions: true
-creneau_horaire: 15
+creneau_horaire: 12
