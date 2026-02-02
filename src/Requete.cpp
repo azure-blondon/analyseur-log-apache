@@ -75,9 +75,9 @@ bool Requete::EstDansLeCreneauHoraire(unsigned short unHoraire) const{
 } //----- Fin de EstDansLeCreneauHoraire
 
 
-bool Requete::ExtensionDifferenteDe(vector<string> extensions) const{
+bool Requete::ExtensionDifferenteDe(vector<string> extensions) const {
     for (auto i: extensions) {
-      	if (URLCible.find("."+i)!=string::npos){
+      	if (URLCible.find("." + i) != string::npos){
             return false;
         }
     }

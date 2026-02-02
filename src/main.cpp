@@ -29,7 +29,7 @@ using namespace std;
 
 //---------------------------------------------------- Variables statiques
 static const string extensions_image_array[] = {"gif", "png", "jpg", "jpeg", "ico"};
-static const vector<string> extensions_image_vector = vector<string>(extensions_image_array, extensions_image_array + sizeof(extensions_image_array) / sizeof(char *));
+static const vector<string> extensions_image_vector = vector<string>(extensions_image_array, extensions_image_array + sizeof(extensions_image_array) / sizeof(string));
 //------------------------------------------------------ Fonctions privées
 
 //////////////////////////////////////////////////////////////////  PUBLIC
