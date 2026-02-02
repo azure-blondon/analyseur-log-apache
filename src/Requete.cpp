@@ -164,19 +164,95 @@ istream & operator>>(istream & flux, Requete & uneRequete){
     char crochetOuvrant, crochetFermant;
     char guillemet;
     char espace;
+    string codeRetour, tailleReponse, ligneHTML;
 
     flux >> uneRequete.AdresseIP;
     flux >> uneRequete.NomUtilisateurVisiteur;
     flux >> uneRequete.NomUtilisateurDonne;
     flux >> crochetOuvrant;
     getline(flux, uneRequete.Instant, ']');
+
+    // Test de fin de fichier, apres les premieres lectures pour confirmer qu on est a la fin
+    if (flux.eof())
+    {
+        return flux;
+    }
+
+    // Traitement de la partie entre guillemets
     flux >> guillemet;
-    flux >> uneRequete.TypeAction;
-    flux >> uneRequete.URLCible;
-    flux >> uneRequete.Protocole;
-    flux >> guillemet;
-    flux >> uneRequete.CodeRetour;
-    flux >> uneRequete.TailleReponse;
+    getline(flux, ligneHTML, '"');
+
+    // Vider les champs avant de les remplir
+    uneRequete.TypeAction = "";
+    uneRequete.URLCible = "";
+    uneRequete.Protocole = "";
+
+    string::iterator it = ligneHTML.begin();
+    string::iterator fin = ligneHTML.end();
+
+    // Lire TypeAction jusqu'au premier espace
+    while(it != fin && *it != ' ')
+    {
+        uneRequete.TypeAction += *it;
+        it++;
+    }
+
+    if(it != fin && *it == ' ') // Espace
+    {
+        it++;
+    }
+
+    string::iterator dernierEspace = fin;
+    if (fin != ligneHTML.begin())
+    {
+        dernierEspace = fin - 1;
+        while(dernierEspace > it && *dernierEspace != ' ')
+        {
+            dernierEspace--;
+        }
+    }
+
+    while(it < dernierEspace && it != fin)
+    {
+        uneRequete.URLCible += *it;
+        it++;
+    }
+
+    if(it != fin && *it == ' ') // Espace
+    {
+        it++;
+    }
+
+    while(it != fin)
+    {
+        uneRequete.Protocole += *it;
+        it++;
+    }
+    
+    // Gestion du cas ou CodeRetour est un tiret :
+    flux >> codeRetour;
+    if (codeRetour == "-")
+    {
+        uneRequete.CodeRetour = 0;
+    }
+    else
+    {
+        cout << codeRetour << endl;
+        uneRequete.CodeRetour = stoul(codeRetour);
+    }
+    
+    // Gestion du cas ou TailleReponse est un tiret :
+    flux >> tailleReponse;
+    if (tailleReponse == "-")
+    {
+        uneRequete.TailleReponse = 0;
+    }
+    else
+    {
+        cout << tailleReponse << endl;
+        uneRequete.TailleReponse = stoul(tailleReponse);
+    }
+
     flux >> guillemet;
     getline(flux, uneRequete.URLReferenceur, '"');
     flux >> guillemet;
