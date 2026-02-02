@@ -237,7 +237,6 @@ istream & operator>>(istream & flux, Requete & uneRequete){
     }
     else
     {
-        cout << codeRetour << endl;
         uneRequete.CodeRetour = stoul(codeRetour);
     }
     
@@ -249,7 +248,6 @@ istream & operator>>(istream & flux, Requete & uneRequete){
     }
     else
     {
-        cout << tailleReponse << endl;
         uneRequete.TailleReponse = stoul(tailleReponse);
     }
 
