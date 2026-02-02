@@ -14,11 +14,11 @@
 //-------------------------------------------------------- Include système
 
 //------------------------------------------------------ Include personnel
-#include "Structures.h"
-#include "Graphe.h"
 #include <ostream>
 #include <unordered_map>
 
+#include "Structures.h"
+#include "Graphe.h"
 
 ///////////////////////////////////////////////////////////////////  PRIVE
 //------------------------------------------------------------- Constantes
@@ -42,13 +42,13 @@ std::ostream & GenererGraphe(std::ostream & flux, DicoGraphe unDicoGraphe)
   */
 
   {
-    std::unordered_map<string, int> tableIndex;
+    std::unordered_map<std::string, int> tableIndex;
     tableIndex = GenererTableIndex(unDicoGraphe);
 
-    flux << "digraph {" << endl;
+    flux << "digraph {" << std::endl;
 
     // Parcours de la table des index : generation des noeuds
-    std::unordered_map<string, int>::const_iterator debutIndex, finIndex;
+    std::unordered_map<std::string, int>::const_iterator debutIndex, finIndex;
     debutIndex = tableIndex.begin();
     finIndex = tableIndex.end();
 
@@ -69,14 +69,14 @@ std::ostream & GenererGraphe(std::ostream & flux, DicoGraphe unDicoGraphe)
       debut++;
     }
 
-    flux << "}" << endl;
+    flux << "}" << std::endl;
 
     return flux;
   }
 
 
 
-std::unordered_map<string, int> GenererTableIndex(const DicoGraphe & unDicoGraphe)
+std::unordered_map<std::string, int> GenererTableIndex(const DicoGraphe & unDicoGraphe)
   //Algorithme
   // Cree une map tableIndex
   // Parcourt la map unDicoGraphe, avec un compteur en parallele, et stocke dans tableIndex
@@ -126,13 +126,13 @@ std::unordered_map<string, int> GenererTableIndex(const DicoGraphe & unDicoGraph
 
 std::ostream & GenererNode(std::ostream & flux, std::string uneNode, int index)
   {
-    return flux << "node" << index << " [label=\"" << uneNode << "\"];" << endl;
+    return flux << "node" << index << " [label=\"" << uneNode << "\"];" << std::endl;
   }
 
 
 
 
-std::ostream & GenererAretes(std::ostream & flux, std::string unReferenceur, const AssociationURLHits & uneAssociation, const std::unordered_map<string, int> & tableIndex)
+std::ostream & GenererAretes(std::ostream & flux, std::string unReferenceur, const AssociationURLHits & uneAssociation, const std::unordered_map<std::string, int> & tableIndex)
   /*
     Algorithme :
       On recupere les infos du referenceur (indice)
@@ -160,7 +160,7 @@ std::ostream & GenererAretes(std::ostream & flux, std::string unReferenceur, con
       indCible = tableIndex.at(uneCible);
       nbHits = debut->second;
 
-      flux << "node" << indReferenceur << " -> node" << indCible << " [label=\"" << nbHits << "\"];" << endl;
+      flux << "node" << indReferenceur << " -> node" << indCible << " [label=\"" << nbHits << "\"];" << std::endl;
       
       debut++;
     }

@@ -1,1 +1,1 @@
-../.././analog -c config5
+../../bin/analog -c config5

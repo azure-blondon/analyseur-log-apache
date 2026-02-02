@@ -1,9 +1,9 @@
 /*************************************************************************
-                           Configuration  -  description
+                           Configuration  -  Une classe permettant de charger des fichiers de configuration
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 13/01/2026
+    copyright            : (C) 2026 par Azure BLONDON
+    e-mail               : azure.blondon@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <Configuration> (fichier Configuration.cpp) ------------
@@ -20,6 +20,7 @@
 #include <optional>
 using namespace boost::algorithm;
 using namespace std;
+
 //------------------------------------------------------ Include personnel
 #include "Configuration.h"
 
@@ -36,6 +37,7 @@ void Configuration::MettreAJour(const string & clef, const string & valeur)
         this->fichierGraphe = valeur;
         return;
     }
+
     if (strcmp(cstr, "fichier_source") == 0) {
         this->fichierSource = valeur;
         return;
@@ -48,32 +50,28 @@ void Configuration::MettreAJour(const string & clef, const string & valeur)
     
     if (strcmp(cstr, "creneau_horaire") == 0) {
         istringstream tmp(valeur);
-        this->creneauHoraire = Configuration::lire<int>(tmp);
+        this->creneauHoraire = Configuration::Lire<int>(tmp);
         return;
     }   
-}
+} //----- Fin de MettreAJour
+
 void Configuration::Charger(const Configuration & uneConfiguration, bool remplacer)
 {
-
-    if (!remplacer && !this->fichierSource.has_value()) this->fichierSource = uneConfiguration.fichierSource;
-    if (!remplacer && !this->fichierConfig.has_value()) this->fichierConfig = uneConfiguration.fichierConfig;
-    if (!remplacer && !this->fichierGraphe.has_value()) this->fichierGraphe = uneConfiguration.fichierGraphe;
-    if (!remplacer && !this->creneauHoraire.has_value()) this->creneauHoraire = uneConfiguration.creneauHoraire;
+    if (!remplacer && !this->fichierSource.has_value())     this->fichierSource     = uneConfiguration.fichierSource;
+    if (!remplacer && !this->fichierConfig.has_value())     this->fichierConfig     = uneConfiguration.fichierConfig;
+    if (!remplacer && !this->fichierGraphe.has_value())     this->fichierGraphe     = uneConfiguration.fichierGraphe;
+    if (!remplacer && !this->creneauHoraire.has_value())    this->creneauHoraire    = uneConfiguration.creneauHoraire;
     if (!remplacer && !this->exclureExtensions.has_value()) this->exclureExtensions = uneConfiguration.exclureExtensions;
-}
-
-
+} //----- Fin de Charger
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Configuration & Configuration::operator = ( const Configuration & uneConfiguration )
-// Algorithme :
-//
+Configuration & Configuration::operator = (const Configuration & uneConfiguration)
 {
-    this->fichierSource = uneConfiguration.fichierSource;
-    this->fichierConfig = uneConfiguration.fichierConfig;
-    this->fichierGraphe = uneConfiguration.fichierGraphe;
-    this->creneauHoraire = uneConfiguration.creneauHoraire;
+    this->fichierSource     = uneConfiguration.fichierSource;
+    this->fichierConfig     = uneConfiguration.fichierConfig;
+    this->fichierGraphe     = uneConfiguration.fichierGraphe;
+    this->creneauHoraire    = uneConfiguration.creneauHoraire;
     this->exclureExtensions = uneConfiguration.exclureExtensions;
     
     return *this;
@@ -82,53 +80,44 @@ Configuration & Configuration::operator = ( const Configuration & uneConfigurati
 
 //-------------------------------------------- Constructeurs - destructeur
 Configuration::Configuration(const Configuration & uneConfiguration)
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Configuration>" << endl;
 #endif
-    this->fichierSource = uneConfiguration.fichierSource;
-    this->fichierConfig = uneConfiguration.fichierConfig;
-    this->fichierGraphe = uneConfiguration.fichierGraphe;
-    this->creneauHoraire = uneConfiguration.creneauHoraire;
+    this->fichierSource     = uneConfiguration.fichierSource;
+    this->fichierConfig     = uneConfiguration.fichierConfig;
+    this->fichierGraphe     = uneConfiguration.fichierGraphe;
+    this->creneauHoraire    = uneConfiguration.creneauHoraire;
     this->exclureExtensions = uneConfiguration.exclureExtensions;
 } //----- Fin de Configuration (constructeur de copie)
 
 
 Configuration::Configuration(string nomFichierConfig)
-:fichierSource(), fichierConfig(nomFichierConfig), creneauHoraire(), fichierGraphe(), exclureExtensions(false)
-// Algorithme :
-//
+:fichierSource(), fichierConfig(nomFichierConfig), creneauHoraire(), fichierGraphe(), exclureExtensions()
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Configuration>" << endl;
 #endif
     ifstream fichier(this->fichierConfig.value_or(""));
     
-    if (!fichier) {
-        return;
-    }
-
-    string line;
-    while(getline(fichier, line)) {
-        if  (line.find(':') == string::npos || line[0] == '#') {
+    if (!fichier) return;
+    
+    string ligne;
+    while(getline(fichier, ligne)) {
+        if (ligne.find(':') == string::npos || ligne[0] == '#') {
             continue;
         }
-        istringstream s(line);
+        istringstream flux_ligne(ligne);
         string clef, valeur;
-        getline(s, clef, ':'); getline(s,valeur);
+        getline(flux_ligne, clef, ':'); getline(flux_ligne,valeur);
         trim(clef); trim(valeur);
         this->MettreAJour(clef, valeur);
     }
-    
 } //----- Fin de Configuration
 
 
 Configuration::Configuration()
 :fichierSource(), fichierConfig(), creneauHoraire(), fichierGraphe(), exclureExtensions()
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Configuration>" << endl;
@@ -138,8 +127,6 @@ Configuration::Configuration()
 
 
 Configuration::~Configuration()
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Configuration>" << endl;
@@ -149,45 +136,43 @@ Configuration::~Configuration()
 
 Configuration Configuration::TrouverConfig(int argc, const char *argv[])
 {
-
     Configuration config;
 
-
-    for (int i = 1; i < argc; i++) {
+    for (int i = 1; i < argc; ++i) {
         const char *arg = argv[i];
+
         if (strcmp(arg, "-e") == 0) {
             config.exclureExtensions = true;
             continue;
         }
+
         if (strcmp(arg, "-t") == 0) {
-            i++;
+            ++i;
             istringstream tmp(argv[i]);
-            config.creneauHoraire = Configuration::lire<int>(tmp);
+            config.creneauHoraire = Configuration::Lire<int>(tmp);
             continue;
         }
+
         if (strcmp(arg, "-g") == 0) {
-            i++;
+            ++i;
             istringstream tmp(argv[i]);
-            config.fichierGraphe = Configuration::lire<string>(tmp);
+            config.fichierGraphe = Configuration::Lire<string>(tmp);
             continue;
         }
+
         if (strcmp(arg, "-c") == 0) {
-            i++;
+            ++i;
             istringstream tmp(argv[i]);
-            config.fichierConfig = Configuration::lire<string>(tmp);
+            config.fichierConfig = Configuration::Lire<string>(tmp);
             continue;
         }
-        config.fichierSource = argv[i];
+
+        // si l'argument n'est pas une option
+        config.fichierSource = arg;
     }
 
     Configuration configFichier(config.fichierConfig.value_or("config"));
     config.Charger(configFichier, false);
-
-    // cout << "config fichier :" << endl;
-    // cout << configFichier << endl << endl;
-
-    // cout << "config finale :" << endl;
-    // cout << config << endl;
 
     return config;
 }

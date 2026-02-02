@@ -20,6 +20,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <ostream>
 #include <unordered_map>
+
 #include "Structures.h"
 
 
@@ -29,17 +30,11 @@
 
 //////////////////////////////////////////////////////////////////  PUBLIC
 //---------------------------------------------------- Fonctions publiques
-// type Nom ( liste de paramètres );
-// Mode d'emploi :
-//
-// Contrat :
-//
-
 
 std::ostream & GenererGraphe(std::ostream & flux, DicoGraphe unDicoGraphe);
-std::unordered_map<string, int> GenererTableIndex(const DicoGraphe & unDicoGraphe);
+std::unordered_map<std::string, int> GenererTableIndex(const DicoGraphe & unDicoGraphe);
 std::ostream & GenererNode(std::ostream & flux, std::string uneNode, int index);
-std::ostream & GenererAretes(std::ostream & flux, std::string unReferenceur, const AssociationURLHits & uneAssociation, const unordered_map<string, int> & tableIndex);
+std::ostream & GenererAretes(std::ostream & flux, std::string unReferenceur, const AssociationURLHits & uneAssociation, const std::unordered_map<std::string, int> & tableIndex);
 
 
 

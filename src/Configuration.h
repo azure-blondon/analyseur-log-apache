@@ -1,9 +1,9 @@
 /*************************************************************************
-                           Configuration  -  description
+                           Configuration  -  Une classe permettant de charger des fichiers de configuration
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 13/01/2026
+    copyright            : (C) 2026 par Azure BLONDON
+    e-mail               : azure.blondon@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Configuration> (fichier Configuration.h) ----------------
@@ -20,8 +20,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Configuration>
-//
-//
+// <Configuration> a pour but de gérer des configurations qui peuvent
+// se surcharger et potentiellement être nulles
 //------------------------------------------------------------------------
 
 struct Configuration
@@ -31,61 +31,40 @@ struct Configuration
     std::optional<std::string> fichierGraphe;
     std::optional<int> creneauHoraire;
     std::optional<bool> exclureExtensions;
+
 //----------------------------------------------------- Méthodes publiques
     static Configuration TrouverConfig(int argc, const char *argv[]);
     void MettreAJour(const std::string & clef, const std::string & valeur);
     void Charger(const Configuration &uneConfiguration, bool remplacer=true);
 
-    
     template <typename T>
-    static std::optional<T> lire(std::istream& flux)
+    static inline std::optional<T> Lire(std::istream& flux)
     {
         T resultat;
         if (flux >> resultat) return resultat;
         else return {};
-    }
+    } //----- Fin de Lire
 
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Configuration & operator=(const Configuration & uneConfiguration);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    Configuration & operator = (const Configuration & uneConfiguration);
 
-    friend ostream & operator<<(ostream & flux, const Configuration & uneConfiguration);
+    friend ostream & operator << (ostream & flux, const Configuration & uneConfiguration);
 
 
 //-------------------------------------------- Constructeurs - destructeur
     Configuration(const Configuration & unConfiguration);
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
     Configuration(std::string nomFichierConfig);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     Configuration();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     virtual ~Configuration();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 };
 
 //-------------------------------- Autres définitions dépendantes de <Configuration>
-inline ostream & operator<<(ostream & flux, const Configuration & uneConfiguration)
+inline ostream & operator << (ostream & flux, const Configuration & uneConfiguration)
 {
     flux << "fichier_source: " << uneConfiguration.fichierSource.value_or("{pas de fichier source}") << endl;
     flux << "fichier_graphe: " << uneConfiguration.fichierGraphe.value_or("{pas de fichier graphe}") << endl;
@@ -98,7 +77,7 @@ inline ostream & operator<<(ostream & flux, const Configuration & uneConfigurati
     }
     
     return flux;
-}
+} //----- Fin de operator <<
 
 
 

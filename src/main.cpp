@@ -13,10 +13,8 @@
 
 //------------------------------------------------------ Include personnel
 #include <string>
-#include <sstream>
 #include <fstream>
 #include <iostream>
-#include <cstring>
 using namespace std;
 
 #include "Configuration.h"

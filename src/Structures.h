@@ -22,6 +22,7 @@
 #include <unordered_map>
 #include <string>
 #include <array>
+
 #include "Requete.h"
 
 //------------------------------------------------------------- Constantes
@@ -30,11 +31,6 @@
 
 //////////////////////////////////////////////////////////////////  PUBLIC
 //---------------------------------------------------- Fonctions publiques
-// type Nom ( liste de paramètres );
-// Mode d'emploi :
-//
-// Contrat :
-//
 
 typedef std::string URL;
 

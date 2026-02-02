@@ -15,7 +15,6 @@
 #include <istream>
 #include <vector>
 
-using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -25,27 +24,27 @@ using namespace std;
 //
 //
 //------------------------------------------------------------------------
-typedef string URL;
+typedef std::string URL;
 
 struct Requete
 {
 //----------------------------------------------------- Attributs
-    string AdresseIP;
-    string NomUtilisateurVisiteur;
-    string NomUtilisateurDonne;
-    string Instant;
-    string TypeAction;
+    std::string AdresseIP;
+    std::string NomUtilisateurVisiteur;
+    std::string NomUtilisateurDonne;
+    std::string Instant;
+    std::string TypeAction;
     URL URLCible;
-    string Protocole;
+    std::string Protocole;
     unsigned int CodeRetour;
     unsigned int TailleReponse;
     URL URLReferenceur;
-    string Navigateur;
+    std::string Navigateur;
     
 
 
 //----------------------------------------------------- Méthodes
-    string SupprimerNomDeDomaine(const URL & uneURL) const;
+    std::string SupprimerNomDeDomaine(const URL & uneURL) const;
     // Mode d'emploi :
     // Renvoie l'URL placée en paramètre sans le nom de domaine
 
@@ -59,49 +58,27 @@ struct Requete
     // Mode d'emploi :
     // Vérifie si la requête est dans le créneau horaire placé en paramètres
 
-    bool ExtensionDifferenteDe(vector<string> extensions) const;
-    // Mode d'emploi :
-    // Renvoie faux si l'URLCible a une des extensions placées en paramètres, vrai sinon
-    
+    bool ExtensionDifferenteDe(std::vector<std::string> extensions) const;
     //------------------------------------------------- Surcharge d'opérateurs
     
-    Requete & operator = ( const Requete & unRequete );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    Requete & operator = (const Requete & unRequete);
     
-    friend ostream & operator<<(ostream & flux, Requete & uneRequete);
-    friend istream & operator>>(istream & flux, Requete & uneRequete);
+    friend std::ostream & operator << (std::ostream & flux, Requete & uneRequete);
+    friend std::istream & operator >> (std::istream & flux, Requete & uneRequete);
 
 
 //-------------------------------------------- Constructeurs - destructeur
     Requete(const Requete & uneRequete);
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
     Requete();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     virtual ~Requete();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+
 };
 
 //-------------------------------- Autres définitions dépendantes de <Requete>
 
-istream & operator>>(istream & flux, Requete & uneRequete);
-// Mode d'emploi :
-//
-// Contrat :
-//
+std::istream & operator >> (std::istream & flux, Requete & uneRequete);
 
 #endif // Requete_H
 
