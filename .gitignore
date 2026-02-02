@@ -1,8 +1,2 @@
 .vscode/
 *.o
-main
-analog
-*.exe
-*.png
-*.dot
-
