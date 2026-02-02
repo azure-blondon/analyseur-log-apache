@@ -47,19 +47,21 @@ std::ostream & GenererGraphe(std::ostream & flux, DicoGraphe unDicoGraphe)
 
     flux << "digraph {" << endl;
 
-    // Premier parcours du graphe : generation des noeuds
+    // Parcours de la table des index : generation des noeuds
+    std::unordered_map<string, int>::const_iterator debutIndex, finIndex;
+    debutIndex = tableIndex.begin();
+    finIndex = tableIndex.end();
+
+    while(debutIndex != finIndex)
+    {
+      GenererNode(flux, debutIndex->first, tableIndex.at(debutIndex->first));
+      debutIndex++;
+    }
+    
+    // Parcours du graphe : generation des aretes
     DicoGraphe::const_iterator debut, fin;
     debut = unDicoGraphe.begin();
     fin = unDicoGraphe.end();
-
-    while(debut != fin)
-    {
-      GenererNode(flux, debut->first, tableIndex.at(debut->first));
-      debut++;
-    }
-    
-    // Premier parcours du graphe : generation des aretes
-    debut = unDicoGraphe.begin();
 
     while(debut != fin)
     {
@@ -84,6 +86,7 @@ std::unordered_map<string, int> GenererTableIndex(const DicoGraphe & unDicoGraph
     std::unordered_map<std::string, int> tableIndex;
 
     // Declaration et definition des iterateurs, et d'indice_url
+    AssociationURLHits::const_iterator debutCibles, finCibles;
     DicoGraphe::const_iterator debut, fin;
     debut = unDicoGraphe.begin();
     fin = unDicoGraphe.end();
@@ -92,8 +95,26 @@ std::unordered_map<string, int> GenererTableIndex(const DicoGraphe & unDicoGraph
     // Parcours de la map (graphe) et remplissage de la map (table indices)
     while(debut != fin)
     {
-      tableIndex.insert(make_pair(debut->first, indice_url));
-      indice_url++;
+      // Verifier si le referenceur est deja dans la table
+      if (tableIndex.find(debut->first) == tableIndex.end())
+      {
+        tableIndex.insert(make_pair(debut->first, indice_url));
+        indice_url++;
+      }
+      // Parmi les cibles, verifier si elles sont toutes dans la table -> Parcours de l'association
+
+      debutCibles = debut->second.begin();
+      finCibles = debut->second.end();
+
+      while(debutCibles != finCibles)
+      {
+        if (tableIndex.find(debutCibles->first) == tableIndex.end())
+        {
+          tableIndex.insert(make_pair(debutCibles->first, indice_url));
+          indice_url++;
+        }
+        debutCibles++;
+      }
       debut++;
     }
 
