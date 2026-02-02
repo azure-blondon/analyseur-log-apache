@@ -42,7 +42,7 @@ void Configuration::MettreAJour(const string & clef, const string & valeur)
     }
     
     if (strcmp(cstr, "exclure_extensions") == 0) {
-        this->exclureExtensions = (valeur == "true");
+        this->exclureExtensions = (strcmp(valeur.c_str(), "true") == 0);
         return;
     } 
     
@@ -126,7 +126,7 @@ Configuration::Configuration(string nomFichierConfig)
 
 
 Configuration::Configuration()
-:fichierSource(), fichierConfig(), creneauHoraire(), fichierGraphe(), exclureExtensions(false)
+:fichierSource(), fichierConfig(), creneauHoraire(), fichierGraphe(), exclureExtensions()
 // Algorithme :
 //
 {

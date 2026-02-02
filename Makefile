@@ -1,5 +1,5 @@
-main: main.o Configuration.o Requete.o Structures.o Graphe.o
-	g++ -o main main.o Configuration.o Requete.o Structures.o Graphe.o
+analog: main.o Configuration.o Requete.o Structures.o Graphe.o
+	g++ -o analog main.o Configuration.o Requete.o Structures.o Graphe.o
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -10,7 +10,7 @@ Requete.o: Requete.cpp Requete.h
 Configuration.o: Configuration.cpp Configuration.h
 	g++ -c Configuration.cpp
 
-Structure.o: Structures.cpp Structures.h
+Structures.o: Structures.cpp Structures.h
 	g++ -c Structures.cpp
 
 Graphe.o: Graphe.cpp Graphe.h

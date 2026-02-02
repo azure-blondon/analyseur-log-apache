@@ -68,10 +68,10 @@ bool Requete::EstOK() const{
 
 
 bool Requete::EstDansLeCreneauHoraire(unsigned short unHoraire) const{
-    int index_espace=Instant.find(":");
+    int index_espace = Instant.find(":");
     string heure_str = Instant.substr(index_espace+1, 2);
-    unsigned short heure_short=stoi(heure_str);
-    return unHoraire==heure_short;
+    unsigned short heure_short = stoi(heure_str);
+    return unHoraire == heure_short;
 } //----- Fin de EstDansLeCreneauHoraire
 
 
