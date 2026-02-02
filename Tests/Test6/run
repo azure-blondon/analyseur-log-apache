@@ -1,1 +1,1 @@
-../.././analog -c config6
+../.././analog -c config6 && cat test6.dot
