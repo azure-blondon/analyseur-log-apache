@@ -2,10 +2,12 @@
 
 ## Nom des membres du groupe (et numéros de binôme)
 
-- BLONDON Azure
-- CABIAS Simon
+Groupe B3407x
+
+- BLONDON Azure (B3405)
+- CABIAS Simon (B3412)
 - DEBUREAUX Mégane (B3409)
-- DUPREZ Juliette
+- DUPREZ Juliette (B3405)
 
 ## Présentation
 
