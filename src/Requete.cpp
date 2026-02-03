@@ -1,9 +1,9 @@
 /*************************************************************************
-                           Requete  -  description
+                           Requete  -  Une classe qui représente des requetes http Apache
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 13/01/2026
+    copyright            : (C) 2026 par Juliette DUPREZ
+    e-mail               : juliette.duprez@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <Requete> (fichier Requete.cpp) ------------

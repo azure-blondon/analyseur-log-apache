@@ -1,9 +1,9 @@
 /*************************************************************************
-                           Structures  -  description
+                           Structures  -  Une classe permettant de gérer un top 10 et des graphes
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 13/01/2026
+    copyright            : (C) 2026 par Simon Cabias
+    e-mail               : simon.cabias@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation du module <Structures> (fichier Structures.cpp) ---------------

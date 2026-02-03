@@ -1,9 +1,9 @@
 /*************************************************************************
-                           main  -  description
+                           main  -  Programme principal de l'application
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 13/01/2026
+    copyright            : (C) 2026 par Azure BLONDON
+    e-mail               : azure.blondon@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation du module <main> (fichier main.cpp) ---------------

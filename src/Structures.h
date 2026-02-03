@@ -1,10 +1,11 @@
 /*************************************************************************
-                           Structures  -  description
+                           Structures  -  Une classe permettant de gérer un top 10 et des graphes
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 13/01/2026
+    copyright            : (C) 2026 par Simon Cabias
+    e-mail               : simon.cabias@insa-lyon.fr
 *************************************************************************/
+
 
 //---------- Interface du module <Structures> (fichier Structures.h) -------------------
 #if ! defined ( Structures_H )
@@ -12,8 +13,8 @@
 
 //------------------------------------------------------------------------
 // Rôle du module <Structures>
-//
-//
+// Définit les structures représentant le top 10 et des graphes
+// Peuple les structures a partir de requetes
 //------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////  INCLUDE

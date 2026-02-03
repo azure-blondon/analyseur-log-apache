@@ -1,9 +1,9 @@
 /*************************************************************************
-                           Requete  -  description
+                           Requete  -  Une classe qui représente des requetes http Apache
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 13/01/2026
+    copyright            : (C) 2026 par Juliette DUPREZ
+    e-mail               : juliette.duprez@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Requete> (fichier Requete.h) ----------------
@@ -21,7 +21,7 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Requete>
-//
+// Permet de convertir une chaine de caractères en Requete, puis de les filtrer
 //
 //------------------------------------------------------------------------
 typedef std::string URL;

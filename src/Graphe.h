@@ -1,9 +1,11 @@
 /*************************************************************************
-                           Graphe  -  description
+                                  Graphe 
+                                    -
+              Fonctions permettant la generation du graphe (.dot)
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
+    début                : 13/01/26
+    copyright            : (C) 2026 par Mégane DEBUREAUX
+    e-mail               : megane.debureaux@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface du module <Graphe> (fichier Graphe.h) -------------------
@@ -12,8 +14,8 @@
 
 //------------------------------------------------------------------------
 // Rôle du module <Graphe>
-//
-//
+// Ce module est destiné à la génération de graphe (.dot) a partir
+// d'un dictionnaire spécialisé
 //------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////  INCLUDE

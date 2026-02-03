@@ -4,8 +4,8 @@
               Fonctions permettant la generation du graphe (.dot)
                              -------------------
     début                : 13/01/26
-    copyright            : (C) 2026 par $AUTHOR$
-    e-mail               : $EMAIL$
+    copyright            : (C) 2026 par Mégane DEBUREAUX
+    e-mail               : megane.debureaux@insa-lyon.fr
 *************************************************************************/
 
 //-------- Réalisation du module <Graphe> (fichier Graphe.cpp) -----------
