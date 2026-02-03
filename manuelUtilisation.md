@@ -2,7 +2,7 @@
 
 ## Nom des membres du groupe (et numéros de binôme)
 
-Groupe B3407x
+Groupe B3407
 
 - BLONDON Azure (B3405)
 - CABIAS Simon (B3412)
